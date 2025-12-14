@@ -1,0 +1,5 @@
+{
+  "name": "FunDo - Colourful Task Manager",
+  "description": "A vibrant and easy-to-use Todo app with list management, drag-and-drop prioritization, and local storage persistence.",
+  "requestFramePermissions": []
+}
