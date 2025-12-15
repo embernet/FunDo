@@ -5,6 +5,8 @@ export interface Todo {
   listId: string;
   isImportant: boolean;
   tag?: string;
+  createdAt?: number;
+  completedAt?: number;
 }
 
 export interface TodoList {
