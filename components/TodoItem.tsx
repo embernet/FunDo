@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Check, GripVertical, Star, Trash2, ArrowRightLeft, Tag } from 'lucide-react';
+import { Check, GripVertical, Star, Trash2, ArrowRightLeft, Tag, Calendar, Clock } from 'lucide-react';
 import { Todo, TodoList, ThemeConfig } from '../types';
 
 interface TodoItemProps {
@@ -23,15 +23,14 @@ const formatDate = (ts?: number) => {
   }).format(new Date(ts));
 };
 
-const getDuration = (start?: number, end?: number) => {
+const getElapsed = (start?: number) => {
     if (!start) return '';
-    const endDate = end || Date.now();
-    const diffMs = endDate - start;
+    const diffMs = Date.now() - start;
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     
-    if (diffDays === 0) return '0 days';
-    if (diffDays === 1) return '1 day';
-    return `${diffDays} days`;
+    if (diffDays === 0) return 'Today';
+    if (diffDays === 1) return '1 day ago';
+    return `${diffDays} days ago`;
 };
 
 export const TodoItem: React.FC<TodoItemProps> = ({
@@ -265,25 +264,34 @@ export const TodoItem: React.FC<TodoItemProps> = ({
       </div>
 
       {/* Expanded Metadata Section */}
-      {todo.createdAt && (
-        <div className="overflow-hidden max-h-0 group-hover:max-h-24 transition-all duration-300 ease-in-out">
-          <div className="pl-14 pr-3 pb-3 text-xs text-slate-400 flex flex-col gap-1">
+      <div className="overflow-hidden max-h-0 group-hover:max-h-24 transition-all duration-300 ease-in-out">
+        <div className="pl-14 pr-4 pb-3 pt-1 text-xs text-slate-400 space-y-1.5">
+          {/* Created Time */}
+          <div className="flex items-center gap-2">
+            <Calendar size={12} className="text-slate-400" />
+            <span className="font-semibold text-slate-500">Created:</span>
+            <span>{formatDate(todo.createdAt || Date.now())}</span>
+          </div>
+          
+          {todo.completed ? (
+            /* Completed Time */
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-slate-500">Created:</span>
-              <span>{formatDate(todo.createdAt)}</span>
-              <span className="bg-slate-100 text-slate-500 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide border border-slate-200">
-                {todo.completed ? 'Time Taken' : 'Age'}: {getDuration(todo.createdAt, todo.completedAt)}
+              <Check size={12} className="text-emerald-500" />
+              <span className="font-semibold text-emerald-600">Completed:</span>
+              <span className="text-emerald-600">
+                {todo.completedAt ? formatDate(todo.completedAt) : 'Just now'}
               </span>
             </div>
-            {todo.completed && todo.completedAt && (
-              <div className="flex items-center gap-2">
-                <span className="font-semibold text-slate-500">Completed:</span>
-                <span>{formatDate(todo.completedAt)}</span>
-              </div>
-            )}
-          </div>
+          ) : (
+            /* Elapsed Time */
+            <div className="flex items-center gap-2">
+              <Clock size={12} className="text-slate-400" />
+              <span className="font-semibold text-slate-500">Active:</span>
+              <span>{getElapsed(todo.createdAt || Date.now())}</span>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

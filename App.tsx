@@ -30,6 +30,7 @@ import {
   Coffee,
   Music,
   Book,
+  BookOpen,
   Code,
   Users,
   Tag as TagIcon,
@@ -61,7 +62,9 @@ import {
   PawPrint,
   Leaf,
   Trophy,
-  User
+  User,
+  CircleHelp,
+  Rocket
 } from 'lucide-react';
 import { Todo, TodoList, ThemeColor } from './types';
 import { INITIAL_LISTS, THEMES, AVAILABLE_ICONS } from './constants';
@@ -83,9 +86,9 @@ const generateId = () => {
 
 // Icon mapping helper
 const IconMap: Record<string, React.ElementType> = {
-  Sun, Briefcase, ShoppingBag, Lightbulb, Home, Star, Heart, Zap, Coffee, Music, Book, Code, Users,
+  Sun, Briefcase, ShoppingBag, Lightbulb, Home, Star, Heart, Zap, Coffee, Music, Book, BookOpen, Code, Users,
   GraduationCap, Dumbbell, Plane, Car, Utensils, Gift, Wallet, Camera, Gamepad2, Hammer, 
-  Palette, Smile, Clock, Calendar, Flag, MapPin, Smartphone, PawPrint, Leaf, Trophy, User
+  Palette, Smile, Clock, Calendar, Flag, MapPin, Smartphone, PawPrint, Leaf, Trophy, User, CircleHelp, Rocket
 };
 
 // Custom App Icon: Smiley face
@@ -245,15 +248,36 @@ export default function App() {
 
   const addTodo = (e?: React.FormEvent) => {
     e?.preventDefault();
-    if (!newTodoText.trim()) return;
+    const rawText = newTodoText.trim();
+    if (!rawText) return;
+    
+    let text = rawText;
+    let finalTag = isTagView ? (activeTag || undefined) : undefined;
+
+    // Hashtag extraction
+    // Match hash followed by alphanumeric, underscore or hyphen
+    // Uses lookahead or boundary to ensure we catch clean tags
+    const tagRegex = /(?:^|\s)(#[a-zA-Z0-9_\-]+)(?=\s|$)/g;
+    const matches = [...rawText.matchAll(tagRegex)];
+    
+    if (matches.length > 0) {
+      // Use the last tag found as the primary tag
+      const lastMatch = matches[matches.length - 1];
+      if (lastMatch && lastMatch[1]) {
+          finalTag = lastMatch[1].substring(1); // Remove '#'
+      }
+      
+      // Clean tags from text to avoid duplication with the badge
+      text = rawText.replace(tagRegex, ' ').replace(/\s+/g, ' ').trim();
+    }
     
     const newTodo: Todo = {
       id: generateId(),
-      text: newTodoText.trim(),
+      text: text,
       completed: false,
       listId: activeListId, // Assign to current active list ID
       isImportant: false,
-      tag: isTagView ? (activeTag || undefined) : undefined,
+      tag: finalTag,
       createdAt: Date.now(),
     };
 

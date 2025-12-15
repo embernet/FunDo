@@ -62,6 +62,9 @@ export const THEMES: Record<ThemeColor, ThemeConfig> = {
 export const INITIAL_LISTS: TodoList[] = [
   { id: '1', name: 'My Day', color: 'rose', icon: 'Sun' },
   { id: '2', name: 'Work', color: 'blue', icon: 'Briefcase' },
+  { id: '9', name: 'Learning', color: 'violet', icon: 'BookOpen' },
+  { id: '10', name: 'Questions', color: 'slate', icon: 'CircleHelp' },
+  { id: '11', name: 'Pet Projects', color: 'rose', icon: 'Rocket' },
   { id: '8', name: 'Home', color: 'cyan', icon: 'Home' },
   { id: '7', name: 'Personal Time', color: 'slate', icon: 'User' },
   { id: '6', name: 'People', color: 'violet', icon: 'Users' },
@@ -72,8 +75,8 @@ export const INITIAL_LISTS: TodoList[] = [
 
 export const AVAILABLE_ICONS = [
   'Sun', 'Briefcase', 'ShoppingBag', 'Lightbulb', 'Home', 'Star', 'Heart', 'Zap', 
-  'Coffee', 'Music', 'Book', 'Code', 'Users', 'User',
+  'Coffee', 'Music', 'Book', 'BookOpen', 'Code', 'Users', 'User',
   'GraduationCap', 'Dumbbell', 'Plane', 'Car', 'Utensils', 'Gift', 'Wallet', 
   'Camera', 'Gamepad2', 'Hammer', 'Palette', 'Smile', 'Clock', 'Calendar', 
-  'Flag', 'MapPin', 'Smartphone', 'PawPrint', 'Leaf', 'Trophy'
+  'Flag', 'MapPin', 'Smartphone', 'PawPrint', 'Leaf', 'Trophy', 'CircleHelp', 'Rocket'
 ];
