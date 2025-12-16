@@ -4,7 +4,11 @@ export interface Todo {
   completed: boolean;
   listId: string;
   isImportant: boolean;
-  tag?: string;
+  isMyDay?: boolean;
+  myDayDate?: string; // ISO Date string (YYYY-MM-DD) for My Day planning
+  tag?: string; // Kept for legacy compatibility
+  tags: string[]; // New: Multiple tags support
+  notes?: string; // New: Optional notes field
   createdAt?: number;
   completedAt?: number;
 }
@@ -14,6 +18,21 @@ export interface TodoList {
   name: string;
   color: ThemeColor;
   icon: string;
+  folderId?: string; // New: ID of the parent folder
+}
+
+export interface Folder {
+  id: string;
+  name: string;
+  icon: string;
+  color: ThemeColor;
+  isExpanded: boolean;
+}
+
+export interface TagCategory {
+  id: string;
+  name: string;
+  tags: string[];
 }
 
 export type ThemeColor = 'rose' | 'blue' | 'green' | 'amber' | 'violet' | 'cyan' | 'slate';

@@ -1,4 +1,4 @@
-import { ThemeConfig, ThemeColor, TodoList } from './types';
+import { ThemeConfig, ThemeColor, TodoList, Folder } from './types';
 
 export const THEMES: Record<ThemeColor, ThemeConfig> = {
   rose: {
@@ -59,24 +59,32 @@ export const THEMES: Record<ThemeColor, ThemeConfig> = {
   },
 };
 
+export const INITIAL_FOLDERS: Folder[] = [
+  { id: 'folder-pet', name: 'Pet Projects', icon: 'Rocket', color: 'rose', isExpanded: true }
+];
+
 export const INITIAL_LISTS: TodoList[] = [
   { id: '1', name: 'My Day', color: 'rose', icon: 'Sun' },
+  { id: '8', name: 'Home', color: 'cyan', icon: 'Home' },
+  { id: '6', name: 'People', color: 'violet', icon: 'Users' },
   { id: '2', name: 'Work', color: 'blue', icon: 'Briefcase' },
   { id: '9', name: 'Learning', color: 'violet', icon: 'BookOpen' },
   { id: '10', name: 'Questions', color: 'slate', icon: 'CircleHelp' },
-  { id: '11', name: 'Pet Projects', color: 'rose', icon: 'Rocket' },
-  { id: '8', name: 'Home', color: 'cyan', icon: 'Home' },
-  { id: '7', name: 'Personal Time', color: 'slate', icon: 'User' },
-  { id: '6', name: 'People', color: 'violet', icon: 'Users' },
+  { id: '4', name: 'Ideas', color: 'amber', icon: 'Lightbulb' },
   { id: '3', name: 'Groceries', color: 'green', icon: 'ShoppingBag' },
   { id: '5', name: 'Health & Fitness', color: 'cyan', icon: 'Heart' },
-  { id: '4', name: 'Ideas', color: 'amber', icon: 'Lightbulb' },
+  { id: '7', name: 'Personal Time', color: 'slate', icon: 'User' },
 ];
 
 export const AVAILABLE_ICONS = [
   'Sun', 'Briefcase', 'ShoppingBag', 'Lightbulb', 'Home', 'Star', 'Heart', 'Zap', 
   'Coffee', 'Music', 'Book', 'BookOpen', 'Code', 'Users', 'User',
   'GraduationCap', 'Dumbbell', 'Plane', 'Car', 'Utensils', 'Gift', 'Wallet', 
-  'Camera', 'Gamepad2', 'Hammer', 'Palette', 'Smile', 'Clock', 'Calendar', 
-  'Flag', 'MapPin', 'Smartphone', 'PawPrint', 'Leaf', 'Trophy', 'CircleHelp', 'Rocket'
+  'Camera', 'Gamepad2', 'Hammer', 'Palette', 'Clock', 'Calendar', 
+  'Flag', 'MapPin', 'Smartphone', 'PawPrint', 'Leaf', 'Trophy', 'CircleHelp', 'Rocket',
+  'Moon', 'Cloud', 'Umbrella', 'Banknote', 'CreditCard', 'PiggyBank', 'Ticket', 
+  'Film', 'Tv', 'Headphones', 'Mic', 'Bike', 'Bus',
+  'Flower2', 'TreePine',
+  'Smile', 'Frown', 'Meh',
+  'ThumbsUp', 'ThumbsDown', 'Hand', 'HandHeart', 'Handshake'
 ];
